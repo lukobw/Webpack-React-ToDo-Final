@@ -7,22 +7,23 @@ class TodoForm extends React.Component {
             value: ''
         };
         this.inputChange = this.inputChange.bind(this);
-        this.onClickHandler = this.onClickHandler.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
     inputChange(event) {
         this.setState({value: event.target.value});
     }
-    onClickHandler(event) {
+    onSubmit(event) {
+        event.preventDefault();
         this.props.add(this.state.value);
         this.setState({value: ''});
     }
     render() {
         return (
-            <form>
+            <form onSubmit={this.onSubmit}>
                 <div className="form-group">
                     <input className="form-control" value={this.state.value} onChange={this.inputChange} />
                 </div>
-                <button type="button" className="btn" onClick={(event) => this.onClickHandler(event)} >Add</button>
+                <button type="submit" className="btn">Add</button>
             </form>
         );
     }
